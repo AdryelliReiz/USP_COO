@@ -40,14 +40,28 @@ public class Ball {
 	}
 
 	public void setAngle(double speed) {
-		double minAngle = Math.toRadians(-45);
-		double maxAngle = Math.toRadians(45);
+		double minAngle;
+		double maxAngle;
+		if(this.speedX == 0 && this.speedY == 0) {
+			double random = Math.random();
+			if(random > 0.5) {
+				this.speedX = -1;
+			} else {
+				this.speedX = 1;
+			}
+		}
+		if(this.speedX > 0) {
+			minAngle = Math.toRadians(150);
+			maxAngle = Math.toRadians(210);
+		} else {
+			minAngle = Math.toRadians(-30);
+			maxAngle = Math.toRadians(30);
+		}
 		double angleRange = maxAngle - minAngle;
 		double angle = Math.random() * angleRange + minAngle;
 		this.speedX = speed * Math.cos(angle);
 		this.speedY = speed * Math.sin(angle);
-		this.speed = speed;
-		System.out.println(this.speedX + " " + this.speedY + " " + " angulo: " + angle);
+		this.speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
 	}
 
 
@@ -98,14 +112,13 @@ public class Ball {
 		if (wallId.equals("Top") || wallId.equals("Bottom")) {
 			this.speedY = -this.speedY;
 		} else  {
-			//CONCERTAR ISSO (DIRECTION OF BALL)
-			this.setAngle(-(this.speed));
+			this.setAngle(this.speed);
 			this.cy = 300;
 			if (wallId.equals("Left")){
-				this.cx = 200;
+				this.cx = 100;
 			}
 			else if(wallId.equals("Right")) {
-				this.cx = 600;
+				this.cx = 700;
 			}
 		}
 	}
