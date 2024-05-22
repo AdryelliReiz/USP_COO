@@ -24,5 +24,6 @@ hs_err_pid*
 replay_pid*
 
 # folders that I don't like
-/out
-/.idea
+out
+.idea
+*.iml
