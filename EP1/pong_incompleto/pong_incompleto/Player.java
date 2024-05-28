@@ -15,6 +15,18 @@ public class Player {
 	private double [] v_limit;
 	private double speed;
 
+	/**
+		 Construtor da classe Player.
+
+		 @param cx coordenada x da posição inicial do player (centro do retangulo que o representa).
+		 @param cy coordenada y da posição inicial do player (centro do retangulo que o representa).
+		 @param width largura do retangulo que representa o player.
+		 @param height altura do retangulo que representa o player.
+		 @param color cor do player.
+		 @param id uma string que identifica o player
+		 @param v_limit um array de double contendo dois valores (em pixels) que determinam os limites verticais da área útil da quadra.
+		 @param speed velocidade do movimento vertical do player (em pixels por millisegundo).
+	 */
 	public Player(double cx, double cy, double width, double height, Color color, String id, double [] v_limit, double speed){
 		this.cx = cx;
 		this.cy = cy;
@@ -26,11 +38,21 @@ public class Player {
 		this.speed = speed;
 	}
 
+	/**
+	 	Método chamado sempre que o player precisa ser (re)desenhado.
+	 */
 	public void draw(){
-		GameLib.setColor(Color.GREEN);
+		GameLib.setColor(this.color);
 		GameLib.fillRect(this.cx, this.cy, this.width, this.height);
 	}
 
+	/**
+		 Método chamado quando se deseja mover o player para cima.
+		 Este método é chamado sempre que a tecla associada à ação
+		 de mover o player para cima estiver pressionada.
+
+		 @param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
+	 */
 	public void moveUp(long delta){
 		if(GameLib.isKeyPressed(GameLib.KEY_A) || GameLib.isKeyPressed(GameLib.KEY_K)) {
 			double value = this.cy - (this.speed * delta);
@@ -42,9 +64,16 @@ public class Player {
 		}
 	}
 
+	/**
+		 Método chamado quando se deseja mover o player para baixo.
+		 Este método é chamado sempre que a tecla associada à ação
+		 de mover o player para baixo estiver pressionada.
+
+		 @param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
+	 */
 	public void moveDown(long delta){
 		if(GameLib.isKeyPressed(GameLib.KEY_Z) || GameLib.isKeyPressed(GameLib.KEY_M)) {
-			double value = this.cy + (this.speed * delta) ;
+			double value = this.cy + (this.speed * delta);
 			if(value + (this.height / 2) > this.v_limit[1]) {
 				this.cy = this.v_limit[1] - (this.height / 2);
 			} else {
@@ -53,22 +82,42 @@ public class Player {
 		}
 	}
 
+	/**
+		 Método que devolve a string de identificação do player.
+		 @return a String de indentificação.
+	 */
 	public String getId() { 
 		return this.id;
 	}
 
+	/**
+		 Método que devolve a largura do retangulo que representa o player.
+		 @return um double com o valor da largura.
+	 */
 	public double getWidth() {
 		return this.width;
 	}
 
+	/**
+		 Método que devolve a algura do retangulo que representa o player.
+		 @return um double com o valor da altura.
+	 */
 	public double getHeight() { 
 		return this.height;
 	}
 
+	/**
+		 Método que devolve a coordenada x do centro do retangulo que representa o player.
+		 @return o valor double da coordenada x.
+	 */
 	public double getCx() { 
 		return this.cx;
 	}
 
+	/**
+		 Método que devolve a coordenada y do centro do retangulo que representa o player.
+		 @return o valor double da coordenada y.
+	 */
 	public double getCy() { 
 		return this.cy;
 	}
